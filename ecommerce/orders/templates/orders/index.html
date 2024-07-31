@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if user.authenticated %}
+    <a href="{% url 'logout' %}" class="btn btn-info">Deconnecter</a>
+    <h1 class="container">Hello Django</h1>
+  {% endif %}
+  <h1>Non connecté</h1>
+{% endblock %}

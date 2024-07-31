@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if orders %}
+    <div class="card">
+      <div class="card-header bg-secondary">
+        <h4 class="text-white text-center">Commande pour : {{ client.username }}</h4>
+      </div>
+      <div class="card-body">
+        <h5 class="bg-info text-center text-white">Information sur le client</h5>
+        <p> <b> <center>{{ client.last_name }} -- {{ client.first_name }} -- {{ client.email }} -- {{ client.age }} ans </center></b> </p>
+        <table class="table table-responsive">
+          <tr>
+            <th>Libelle</th>
+            <th>Prix</th>
+            <th>Stock</th>
+          </tr>
+          <h5 class="bg-secondary text-center text-white">Information sur les commandes</h5>
+        
+          {% for order in orders %}
+            <h5>Date : {{ order.created_at|date }}</h5>
+           
+            {% for product in order.products.all %}
+              <tr>
+                <td>{{ product.wording }}</td>
+                <td>{{ product.price }} € </td>
+                <td>{{ product.stock }}</td>
+              </tr>
+            {% endfor %}
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  {% else %}
+    <p class="alert alert-warning">
+      <b>{{ client.username }}</b> n'a pas effectué de commandes
+    </p>
+  {% endif %}
+{% endblock %}
